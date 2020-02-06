@@ -1,22 +1,26 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+ <html class="no-js" lang="en">
   <head>
-    <title>Marching Band Gig Sign Up</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+
+    <title>LGBAC Gig Sign Up</title>
     <header><img src="images/header.png"></header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
-    <h1>Hi Band!</h1>
 
-    <h2>Existing member?</h2>
-      <a href="/login">Sign In Here</a>
+    <div class="wrapper">
 
-    <h2>New member?</h2> 
-      <a href="/members/signup">Create Your Profile Here!</a>
-    
-    <p>The Lesbian & Gay Big Apple Corps (LGBAC) is 
-    a community band based in New York City. Founded on 
-    September 24, 1979 as the New York Gay Community Marching Band, 
-    LGBAC is the third-oldest community band in the United States 
-    dedicated to serving the LGBTQ+ community.</p>
+        <%= yield %>
+
+      <footer class="branding">
+        <small>&copy; 2020 <strong>LGBAC</strong></small>
+      </footer>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   </body>
 </html>
