@@ -1,6 +1,6 @@
 class GigsController < ApplicationController
 
-  # GET: /gigs
+  # INDEX
   get "/gigs" do
     erb :"/gigs/index.html"
   end
@@ -34,4 +34,5 @@ class GigsController < ApplicationController
   delete "/gigs/:id/delete" do
     redirect "/gigs"
   end
+
 end

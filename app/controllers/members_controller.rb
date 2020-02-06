@@ -1,37 +1,50 @@
 class MembersController < ApplicationController
 
-  # GET: /members
-  get "/members" do
-    erb :"/members/index.html"
+  # INDEX - SHOW ALL MEMBERS?
+  # get "/members" do
+  #   erb :"/members/index.html"
+  # end
+
+  # NEW MEMBER
+  get "/signup" do
+    
+    erb :'/members/new'
   end
 
-  # GET: /members/new
-  get "/members/new" do
-    erb :"/members/new.html"
+  # POST NEW MEMBER
+  post "/signup" do
+    if params[:email] == "" || params[:password] == ""
+      redirect to '/signup'
+    else
+      @member = Member.create(:email => params[:email], 
+      :password => params[:password], :full_name => params[:full_name], 
+      :instrument => params[:instrument])
+
+      session[:member_id] = @member.id
+      redirect '/members/show'
+    end
   end
 
-  # POST: /members
-  post "/members" do
-    redirect "/members"
+  # LOG IN
+  get "/login" do
+    erb :"members/login"
   end
 
-  # GET: /members/5
-  get "/members/:id" do
-    erb :"/members/show.html"
+  # POST LOG IN
+  post "/login" do 
+    @member = Member.find_by(email: params[:email], password: params[:password])
+    if @member
+      session[:member_id] = @member.id
+      redirect '/members/show'
+    else
+      redirect to '/members/login'
+    end
   end
 
-  # GET: /members/5/edit
-  get "/members/:id/edit" do
-    erb :"/members/edit.html"
+  #LOG OUT
+  get '/logout' do
+    session.clear
+    redirect to '/welcome'
   end
 
-  # PATCH: /members/5
-  patch "/members/:id" do
-    redirect "/members/:id"
-  end
-
-  # DELETE: /members/5/delete
-  delete "/members/:id/delete" do
-    redirect "/members"
-  end
 end
