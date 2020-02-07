@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-    <h1>This is the show page for an individual instance of your model.</h1>
-    <a href="/logout">Log Out Here</a>
+
+    <h1> Welcome Back! </h1>
+    <h2>Profile</h2>
+    Name: <%= @member_obj.full_name %><br/>
+    Email: <%= @member_obj.email %><br/>
+    Instrument: <%= @member_obj.instrument %><br/>
+    Current Gig Attendance: <br/>
+
+    Edit Attendance? <br/>
+    <a href="/logout">Log Out</a>
+
 </html>
