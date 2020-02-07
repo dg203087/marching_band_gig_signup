@@ -1,50 +1,48 @@
 class MembersController < ApplicationController
 
-  # INDEX - SHOW ALL MEMBERS?
-  # get "/members" do
-  #   erb :"/members/index.html"
-  # end
-
-  # NEW MEMBER
   get "/signup" do
-    
     erb :'/members/new'
   end
 
-  # POST NEW MEMBER
   post "/signup" do
     if params[:email] == "" || params[:password] == ""
       redirect to '/signup'
     else
-      @member = Member.create(:email => params[:email], 
-      :password => params[:password], :full_name => params[:full_name], 
-      :instrument => params[:instrument])
-
-      session[:member_id] = @member.id
-      redirect '/members/show'
+      @member_obj = Member.create(:email => params[:email], 
+      :password => params[:password], :instrument => params[:instrument], 
+      :full_name => params[:full_name])
+      session[:member_id] = @member_obj.id
+      redirect "/members/#{@member_obj.id}"
     end
   end
 
-  # LOG IN
   get "/login" do
-    erb :"members/login"
+    erb :'members/login'
+      # if logged_in?
+      #   redirect '/members/show'
+      # else
+      #   erb :"/members/login"
+      # end
   end
 
-  # POST LOG IN
   post "/login" do 
-    @member = Member.find_by(email: params[:email], password: params[:password])
-    if @member
-      session[:member_id] = @member.id
-      redirect '/members/show'
+    @member_obj = Member.find_by(:email => params[:email])
+    if @member_obj && @member_obj.authenticate(params[:password])
+      session[:member_id] = @member_obj.id
+      redirect "/members/#{@member_obj.id}"
     else
       redirect to '/members/login'
     end
   end
 
-  #LOG OUT
-  get '/logout' do
+  get '/logout' do #should be a delete?
     session.clear
-    redirect to '/welcome'
+    redirect to '/'
+  end
+
+  get "/members/:id" do
+    @member_obj = Member.find(params[:id])
+    erb :'members/show'
   end
 
 end

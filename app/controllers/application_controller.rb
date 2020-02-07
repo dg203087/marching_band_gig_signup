@@ -13,4 +13,14 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  helpers do
+    def logged_in?
+      !!session[:member_id] #double negation converts value to binary
+    end
+
+    def current_member
+        Member.find(session[:member_id])
+    end
+  end
+
 end
