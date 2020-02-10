@@ -1,1 +1,11 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<h1>Add a New Gig</h1>
+
+<form action='/gigs' method='POST'>
+    Gig Name: <input type='text' name='gig_name' value=''> <br/>
+    Date: <input type='text' name='date' value=''> <br/>
+    Location: <input type='text' name='location' value=''> <br/>
+
+    Check box if you plan on attending: <input type='checkbox' name='attending' value='true'><br/>
+ 
+    <input type='submit' value='Add Gig'>
+</form>

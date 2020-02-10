@@ -1,1 +1,24 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h1>Edit Gig Attendance</h1>
+
+<form action="/gigs/<%= @gigs.id%>" method='post'>
+<input type='hidden' id='hidden' name='_method' value='patch'>
+
+Check box if you plan on attending the gig: 
+<% if @gigs.attend == true %>
+  <input 
+    type='checkbox' 
+    name='complete' 
+    value='true'
+    checked
+  /> 
+<% else %>
+  <input 
+    type='checkbox' 
+    name='complete' 
+    value='true'
+  /> 
+<% end %>
+<br/>
+<input type='submit' value='Submit Attendance'>
+
+</form>
