@@ -2,36 +2,48 @@ class GigsController < ApplicationController
 
   # INDEX
   get "/gigs" do
-    erb :"/gigs/index.html"
+    @gigs=Gigs.all
+    erb :"/gigs/index"
   end
 
-  # GET: /gigs/new
   get "/gigs/new" do
-    erb :"/gigs/new.html"
+    erb :"/gigs/new"
   end
 
-  # POST: /gigs
   post "/gigs" do
+    @gigs = Gigs.create(
+      :gig_name => params[:gig_name],
+      :date => params[:date], 
+      :location => params[:location], 
+      :attending => params[:attending])
+    @gigs.save
     redirect "/gigs"
   end
 
-  # GET: /gigs/5
   get "/gigs/:id" do
-    erb :"/gigs/show.html"
+    @gigs = Gigs.find(params[:id])
+    erb :"/gigs/show"
   end
 
-  # GET: /gigs/5/edit
   get "/gigs/:id/edit" do
-    erb :"/gigs/edit.html"
+    @gigs = Gigs.find_by_id(params[:id])
+    erb :"/gigs/edit"
   end
 
-  # PATCH: /gigs/5
   patch "/gigs/:id" do
-    redirect "/gigs/:id"
+    updated_gig = Gigs.find_by_id(params[:id])
+    updated_gig.update(
+      :gig_name => params[:gig_name],
+      :date => params[:date], 
+      :location => params[:location], 
+      :attending => params[:attending]
+    )
+    redirect "/gigs/#{updated_gig.:id}"
   end
 
-  # DELETE: /gigs/5/delete
   delete "/gigs/:id/delete" do
+    @deletegig = Gigs.find_by_id(params[:id])
+    @deletegig.delete
     redirect "/gigs"
   end
 
