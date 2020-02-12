@@ -1,1 +1,8 @@
 <h1>This is a list of gigs</h1>
+<% @gigs.each do |gig| %>
+    <h2><b>Gig Name: </b><%= gig.gig_name %> 
+    <a href='/gigs/<%= gig.id %>'>Click to edit or delete</a></h2>
+    <p><b>Date: </b><%= goal.date %></p>
+    <p><b>Location: </b><%= gig.location %></p>
+    <p><b>Attending? </b><%= gig.attending %></p>
+<% end %>

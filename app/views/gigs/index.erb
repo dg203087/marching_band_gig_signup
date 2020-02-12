@@ -1,10 +1,10 @@
 <h1>Gig List</h1>
 
 <% @gigs.each do |gig_obj| %>
-  <p>Name: <%= gig_obj[:gig_name] %></p>
-  <p>Date: <%= gig_obj[:date] %></p>
-  <p>Location: <%= gig_obj[:location] %></p>
-  <p>Attending: <%= gig_obj[:attending] %></p>
+  <p>Name: <%= gig_obj[:gig_name] %><br/>
+  Date: <%= gig_obj[:date] %><br/>
+  Location: <%= gig_obj[:location] %><br/>
+  Attending: <%= gig_obj[:attending] %><br/></p>
 <% end %>
 
 <a href="/gigs/:id/edit">Edit Gigs</a>

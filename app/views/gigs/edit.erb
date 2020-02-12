@@ -1,24 +1,28 @@
 <h1>Edit Gig Attendance</h1>
 
-<form action="/gigs/<%= @gigs.id%>" method='post'>
-<input type='hidden' id='hidden' name='_method' value='patch'>
+<form action="/gigs/<%=@gigs.id%>" method = 'POST'>
 
 Check box if you plan on attending the gig: 
-<% if @gigs.attend == true %>
+<% if @gigs.attend == true %> 
   <input 
     type='checkbox' 
     name='complete' 
-    value='true'
-    checked
+    value='true' 
+    checked 
   /> 
-<% else %>
-  <input 
-    type='checkbox' 
-    name='complete' 
-    value='true'
-  /> 
-<% end %>
-<br/>
+  <% else %> 
+    <input 
+      type='checkbox' 
+      name='complete' 
+      value='true' 
+      /> 
+  <% end %><br/>
+
 <input type='submit' value='Submit Attendance'>
 
 </form>
+
+<a href="/gigs/new">Add Gigs</a><br/>
+<a href="/gigs/:id/edit">Edit Gigs</a><br/>
+<a href="/gigs/:id/delete">Delete Gigs</a><br/>
+<a href="/logout">Log Out</a><br/>
