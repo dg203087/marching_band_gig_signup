@@ -7,6 +7,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "marchingbandforever"
+    #extra layer of security
   end
 
   get "/" do
@@ -15,11 +16,14 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def logged_in?
-      !!session[:member_id] #double negation converts value to binary
+      !!current_member #double negation converts value to binary
     end
 
     def current_member
-        Member.find(session[:member_id])
+        @current_member ||= Member.find_by(id: session[:member_id]) 
+        #find returns an error if it doesn't find what it's looking for
+        #find_by returns nil instead of error
+        #energy saver or ||= (or equals) to query the database less
     end
   end
 
