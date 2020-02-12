@@ -8,13 +8,13 @@ class MembersController < ApplicationController
     # end
   end
 
-  post "/signup" do
+  #create new members and persist to database
+  post "/members" do
     if params[:email] == "" || params[:password] == ""
+      # error message STRETCH
       redirect to '/signup'
     else
-      @member_obj = Member.create(:email => params[:email], 
-      :password => params[:password], :instrument => params[:instrument], 
-      :full_name => params[:full_name])
+      @member_obj = Member.create(params)
       session[:member_id] = @member_obj.id
       redirect "/members/#{@member_obj.id}"
     end
@@ -36,13 +36,13 @@ class MembersController < ApplicationController
     
     if @member_obj && @member_obj.authenticate(params[:password])
       session[:member_id] = @member_obj.id
-      redirect "/members/#{@member_obj.id}"
+      redirect "/members/#{@member_obj.id}" 
+      #redirect is used instead of render - separation of concerns (each thing does one thing)
+      #render is mostly from get requests
     else
-      
+      #enter error message STRETCH
       redirect to '/login'
     end
-
-
   end
 
   get '/logout' do #should be a delete?

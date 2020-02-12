@@ -10,21 +10,25 @@ class GigsController < ApplicationController
     erb :"/gigs/new"
   end
 
-  post "/gigs" do
-    # @gigs = Gig.create(
-    #   :gig_name => params[:gig_name],
-    #   :date => params[:date], 
-    #   :location => params[:location], 
-    #   :attending => params[:attending])
-    gig = current_member.gigs.build(params)
-    gig.save
-    redirect "/members/#{current_member.id}"
+  post "/gigs" do 
+    if !logged_in?
+      redirect "/"
+    end
+
+    if params[:gigs] != "" #if it's not blank?
+      gig = current_member.gigs.build(params)
+      gig.save
+      redirect "/members/#{current_member.id}"
+    else
+      redirect "/gigs/new"
+    end
   end
 
+  #SHOW ROUTE
   get "/gigs/:id" do
     @gigs = Gig.find_by_id(params[:id])
     if logged_in?
-      erb :"gigs/edit"
+      erb :"gigs/show"
     else 
       redirect '/login'
     end
