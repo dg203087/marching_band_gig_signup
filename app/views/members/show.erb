@@ -5,20 +5,17 @@
     <p><b>Name: </b><%= @member_obj.full_name %><br/>
     <b>Email: </b><%= @member_obj.email %><br/>
     <b>Instrument: </b><%= @member_obj.instrument %></p>
-    
-    <h3><u>Gig Attendance</u></h3>
+
+    <h3><u> Current Gig Attendance (Select to Edit/Delete)</u></h3>
+
     <% @gigs.each do |gig| %>
-        <p><b>Gig Name: </b><%= gig.gig_name %>
-        <a href='/gigs/<%= gig.id %>'>Edit/Delete</a><br/>
-        <b>Date: </b><%= gig.date %><br/>
-        <b>Location: </b><%= gig.location %><br/>
+        <p><b><a href="/gigs/<%=gig.id%>"><%= gig.gig_name %></a></b><br>
         <b>Attending? </b><%= gig.attending %></p>
     <% end %>
     
     <br/>
 
-    <a href="/gigs">Add/Edit/Delete Gigs</a><br/>
-    <a href="/gigs/new">Add Gigs</a><br/>
+    <a href="/gigs/new">Add Gig</a><br/>
     <a href="/logout">Log Out</a>
 
 </html>

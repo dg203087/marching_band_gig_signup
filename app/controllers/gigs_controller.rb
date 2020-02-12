@@ -26,39 +26,63 @@ class GigsController < ApplicationController
 
   #SHOW ROUTE
   get "/gigs/:id" do
-    @gigs = Gig.find_by_id(params[:id])
+    find_gig
+    # @gigs = Gig.find(params[:id])
     if logged_in?
-      erb :"gigs/show"
+      erb :'gigs/show' #redirects destroy instance variables
     else 
       redirect '/login'
     end
   end
 
+  # PURPOSE: Find gig edit page and render edit form
   get "/gigs/:id/edit" do
-    binding.pry
-    @gigs = Gig.find_by_id(params[:id])
+    find_gig
+    # @gigs = Gig.find(params[:id])
     if logged_in?
-      erb :"/gigs/edit"
-    else
-      redirect '/login'
+      if @gigs.member == current_member
+        erb :"/gigs/edit"
+      else
+        redirect "/members/#{current_member.id}"
+      end
+    else  
+      redirect '/'
     end
   end
 
+  #PURPOSE: post changes to gig
   patch "/gigs/:id" do
-    updated_gig = Gig.find_by_id(params[:id])
-    updated_gig.update(
-      :gig_name => params[:gig_name],
-      :date => params[:date], 
-      :location => params[:location], 
-      :attending => params[:attending]
-    )
-    redirect "/gigs/#{updated_gig.id}"
+    find_gig
+    if logged_in? && @gigs.member_id == current_member
+      @gigs = @gigs.update( #have to be more specific with update, patch creates extra pairs in hash
+        :gig_name => params[:gig_name],
+        :date => params[:date], 
+        :location => params[:location], 
+        :attending => params[:attending]
+      )
+      #redirect "/gigs/#{@gigs.id}"
+      redirect "/gigs/#{@gigs.id}"
+      #need to redirect back to members page - still within construct/make sense?
+    else
+      redirect '/'
+    end
   end
 
-  delete "/gigs/:id/delete" do
-    @delete_gig = Gig.find_by_id(params[:id])
-    @delete_gig.delete
-    redirect "/gigs"
+  delete "/gigs/:id" do
+    find_gig
+    #@delete_gig = Gig.find_by_id(params[:id])
+    if authorized_to_edit(@gigs)
+      @gigs.destroy #destroy removes "call backs"/related actions / delete less comprehesive
+      redirect "/gigs" #not a job to show us something, it's to complete and action
+    else
+      redirect "/gigs"
+    end
+  end
+
+  private
+
+  def find_gig #instance method to stop doing repeated work
+    @gigs = Gig.find(params[:id])
   end
 
 end

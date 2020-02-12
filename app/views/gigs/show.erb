@@ -1,13 +1,11 @@
-<h1>Current Gigs</h1>
-<% @gigs.each do |gig| %>
-    <h2><b>Gig Name: </b><%= gig.gig_name %> 
-    <a href='/gigs/<%= gig.id %>'>Click to edit or delete</a></h2>
-    <p><b>Date: </b><%= goal.date %></p>
-    <p><b>Location: </b><%= gig.location %></p>
-    
-    <% def bool_to_string(bool) %>
-    <% bool ? "Yes" : "No" %>
-    <% end %>
+<h2><b><%= @gigs.gig_name %></b></h2>
+<p><b>Date: </b><%= @gigs.date %></p>
+<p><b>Location: </b><%= @gigs.location %></p>
+<p><b>Attending? </b><%= @gigs.attending %></p>
 
-    <p><b>Attending? </b><%= bool_to_string(gig.attending) %></p>
-<% end %>
+<a href='/gigs/<%= @gigs.id %>/edit'>Edit</a><br>
+<a href='/gigs/<%= @gigs.id %>/delete'>Delete</a><br>
+
+<a href='/members/<%=current_member.id%>'>Back to My Profile</a><br>
+<a href="/logout">Log Out</a>
+

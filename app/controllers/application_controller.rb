@@ -29,6 +29,16 @@ class ApplicationController < Sinatra::Base
         #find_by returns nil instead of error
         #energy saver or ||= (or equals) to query the database less
     end
+
+    def authorized_to_edit(gig_array)
+      binding.pry
+      gig_array.(:member_id) == current_member.id
+    end
+
+    def bool_to_string(bool)
+      bool ? "Yes" : "No"
+    end
+
   end
 
 end

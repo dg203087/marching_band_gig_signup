@@ -1,12 +1,13 @@
-<h1>Gig List</h1>
+<h1>Gig Attendance List</h1>
 
-<% @gigs.each do |gig_obj| %>
-  <p>Name: <%= gig_obj[:gig_name] %><br/>
-  Date: <%= gig_obj[:date] %><br/>
-  Location: <%= gig_obj[:location] %><br/>
-  Attending: <%= gig_obj[:attending] %><br/></p>
-<% end %>
+  <% @gigs.each do |gig| %>
+    <p>Name: <%= gig.gig_name %></a><br/>
+    <a href='/gigs/<%= gig.id %>/edit'>Edit</a>
+    <a href='/gigs/<%= gig.id %>/delete'>Delete</a><br/>
+    Date: <%= gig.date %><br/>
+    Location: <%= gig.location %><br/>
+    Attending: <%= gig.attending %><br/></p>
+  <% end %>
 
-<a href="/gigs/:id/edit">Edit Gigs</a>
-<a href="/gigs/:id/delete">Delete Gigs</a>
+
 <a href="/logout">Log Out</a>
