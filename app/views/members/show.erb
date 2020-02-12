@@ -6,7 +6,7 @@
     <b>Email: </b><%= @member_obj.email %><br/>
     <b>Instrument: </b><%= @member_obj.instrument %></p>
     
-    <h3>Gig Attendance</h3>
+    <h3><u>Gig Attendance</u></h3>
     <% @gigs.each do |gig| %>
         <p><b>Gig Name: </b><%= gig.gig_name %>
         <a href='/gigs/<%= gig.id %>'>Edit/Delete</a><br/>
@@ -17,6 +17,7 @@
     
     <br/>
 
+    <a href="/gigs">Add/Edit/Delete Gigs</a><br/>
     <a href="/gigs/new">Add Gigs</a><br/>
     <a href="/logout">Log Out</a>
 
