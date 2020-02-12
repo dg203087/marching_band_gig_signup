@@ -1,7 +1,11 @@
 class MembersController < ApplicationController
 
   get "/signup" do
-    erb :'/members/new'
+    # if logged_in?
+    #   redirect 'members/id'
+    # else 
+      erb :'/members/new'
+    # end
   end
 
   post "/signup" do
@@ -17,12 +21,12 @@ class MembersController < ApplicationController
   end
 
   get "/login" do
-    erb :'members/login'
-      # if logged_in?
-      #   redirect '/members/show'
-      # else
-      #   erb :"/members/login"
-      # end
+    # @error_message = params[:error]
+    # if logged_in?
+    #   redirect 'members/:id'
+    # else
+        erb :'members/login'      
+    # end
   end
 
   post "/login" do 
@@ -31,7 +35,7 @@ class MembersController < ApplicationController
       session[:member_id] = @member_obj.id
       redirect "/members/#{@member_obj.id}"
     else
-      redirect to '/members/login'
+      redirect to '/signup'
     end
   end
 
@@ -42,6 +46,7 @@ class MembersController < ApplicationController
 
   get "/members/:id" do
     @member_obj = Member.find(params[:id])
+    @gigs = @member_obj.gigs
     erb :'members/show'
   end
 

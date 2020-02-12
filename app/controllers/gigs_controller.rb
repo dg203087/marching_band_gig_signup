@@ -2,7 +2,7 @@ class GigsController < ApplicationController
 
   # INDEX
   get "/gigs" do
-    @gigs=Gigs.all
+    @gigs = Gig.all
     erb :"/gigs/index"
   end
 
@@ -11,39 +11,49 @@ class GigsController < ApplicationController
   end
 
   post "/gigs" do
-    @gigs = Gigs.create(
-      :gig_name => params[:gig_name],
-      :date => params[:date], 
-      :location => params[:location], 
-      :attending => params[:attending])
-    @gigs.save
-    redirect "/gigs"
+    # @gigs = Gig.create(
+    #   :gig_name => params[:gig_name],
+    #   :date => params[:date], 
+    #   :location => params[:location], 
+    #   :attending => params[:attending])
+    gig = current_member.gigs.build(params)
+    gig.save
+    redirect "/members/#{current_member.id}"
   end
 
   get "/gigs/:id" do
-    @gigs = Gigs.find(params[:id])
-    erb :"/gigs/show"
+    @gigs = Gig.find_by_id(params[:id])
+    if logged_in?
+      erb :"gigs/edit"
+    else 
+      redirect '/login'
+    end
   end
 
   get "/gigs/:id/edit" do
-    @gigs = Gigs.find_by_id(params[:id])
-    erb :"/gigs/edit"
+    binding.pry
+    @gigs = Gig.find_by_id(params[:id])
+    if logged_in?
+      erb :"/gigs/edit"
+    else
+      redirect '/login'
+    end
   end
 
   patch "/gigs/:id" do
-    updated_gig = Gigs.find_by_id(params[:id])
+    updated_gig = Gig.find_by_id(params[:id])
     updated_gig.update(
       :gig_name => params[:gig_name],
       :date => params[:date], 
       :location => params[:location], 
       :attending => params[:attending]
     )
-    redirect "/gigs/#{updated_gig.:id}"
+    redirect "/gigs/#{updated_gig.id}"
   end
 
   delete "/gigs/:id/delete" do
-    @deletegig = Gigs.find_by_id(params[:id])
-    @deletegig.delete
+    @delete_gig = Gig.find_by_id(params[:id])
+    @delete_gig.delete
     redirect "/gigs"
   end
 
