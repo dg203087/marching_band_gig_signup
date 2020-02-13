@@ -14,12 +14,13 @@ class GigsController < ApplicationController
     if !logged_in?
       redirect "/"
     end
-
-    if params[:gigs] != "" #if it's not blank?
+    
+    if params[:gigs] != nil #there is something wrong gere
       gig = current_member.gigs.build(params)
       gig.save
       redirect "/members/#{current_member.id}"
     else
+      flash[:message] = "Please enter valid gig."
       redirect "/gigs/new"
     end
   end
