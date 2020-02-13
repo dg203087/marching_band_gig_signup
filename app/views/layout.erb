@@ -1,19 +1,25 @@
 <!DOCTYPE html>
- <html class="no-js" lang="en">
- <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
+ <html>
   <head>
+    <title>LGBAC Gig Sign Up</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">  
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>LGBAC Gig Sign Up</title>
-    <header><center><img src="images/header.png"></center></header>
-
   </head>
   <body>
-
-    <div>
+    <div class="page-header" style="text-align: center">
+      <img src="images/header.png">
+    </div>
+    
     <div class="wrapper">
+
+      <% if flash[:message] %>
+        <h3><%= flash[:message] %></h3>
+      <% end %>
+
     
         <%= yield %>
 
