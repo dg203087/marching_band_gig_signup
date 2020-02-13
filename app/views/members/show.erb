@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html>
+    <body>
 
-    <h2>LGBAC Member Profile</h2>
-    <p><b>Name: </b><%= @member_obj.full_name %><br/>
-    <b>Email: </b><%= @member_obj.email %><br/>
-    <b>Instrument: </b><%= @member_obj.instrument %></p>
+        <h2>LGBAC Member Profile</h2>
+        <p><b>Name: </b><%= @member_obj.full_name %><br/>
+        <b>Email: </b><%= @member_obj.email %><br/>
+        <b>Instrument: </b><%= @member_obj.instrument %></p>
 
-    <h3><u> Current Gig Attendance (Select to Edit/Delete)</u></h3>
+        <h3><u> Current Gig Attendance (Select to Edit/Delete)</u></h3>
 
-    <% @gigs.each do |gig| %>
-        <p><b><a href="/gigs/<%=gig.id%>"><%= gig.gig_name %></a></b><br>
-        <b>Attending? </b><%= gig.attending %></p>
-    <% end %>
-    
-    <br/>
+        <% @gigs.each do |gig| %>
+            <p><b><a href="/gigs/<%=gig.id%>"><%= gig.gig_name %></a></b><br>
+            <b>Attending? </b><%= bool_to_string(gig.attending) %></p>
+        <% end %>
+        
+        <br/>
 
-    <a href="/gigs/new">Add Gig</a><br/>
-    <a href="/logout">Log Out</a>
-
+        <a href="/gigs/new">Add Gig</a><br/>
+        <a href="/logout">Log Out</a>
+    </body>
 </html>
