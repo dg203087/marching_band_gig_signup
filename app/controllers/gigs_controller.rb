@@ -53,16 +53,14 @@ class GigsController < ApplicationController
   #PURPOSE: post changes to gig
   patch "/gigs/:id" do
     find_gig
-    if logged_in? && @gigs.member_id == current_member
-      @gigs = @gigs.update( #have to be more specific with update, patch creates extra pairs in hash
+    if logged_in? && @gigs.member_id == current_member.id
+      @gigs.update( #have to be more specific with update, patch creates extra pairs in hash
         :gig_name => params[:gig_name],
         :date => params[:date], 
         :location => params[:location], 
         :attending => params[:attending]
       )
-      #redirect "/gigs/#{@gigs.id}"
       redirect "/gigs/#{@gigs.id}"
-      #need to redirect back to members page - still within construct/make sense?
     else
       redirect '/'
     end
@@ -71,12 +69,8 @@ class GigsController < ApplicationController
   delete "/gigs/:id" do
     find_gig
     #@delete_gig = Gig.find_by_id(params[:id])
-    if authorized_to_edit(@gigs)
-      @gigs.destroy #destroy removes "call backs"/related actions / delete less comprehesive
-      redirect "/gigs" #not a job to show us something, it's to complete and action
-    else
-      redirect "/gigs"
-    end
+    @gigs.destroy #destroy removes "call backs"/related actions / delete less comprehesive
+    redirect "/members/#{current_member.id}" #not a job to show us something, it's to complete and action
   end
 
   private

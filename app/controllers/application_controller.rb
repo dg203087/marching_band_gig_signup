@@ -30,9 +30,8 @@ class ApplicationController < Sinatra::Base
         #energy saver or ||= (or equals) to query the database less
     end
 
-    def authorized_to_edit(gig_array)
-      binding.pry
-      gig_array.(:member_id) == current_member.id
+    def authorized_to_edit?(gig)
+      gig.member_id == current_member.id
     end
 
     def bool_to_string(bool)
