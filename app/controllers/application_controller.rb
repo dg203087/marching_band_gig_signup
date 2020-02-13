@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "marchingbandforever"
     #extra layer of security
+    register Sinatra::Flash
   end
 
   get "/" do
