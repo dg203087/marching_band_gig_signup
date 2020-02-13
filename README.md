@@ -26,7 +26,8 @@ Corneal gem
 Deanna Kelley
 
 <h2>License</h2>
-This project is licensed under the MIT License - see the LICENSE.md file for details
+This project is licensed under the MIT License. 
+https://opensource.org/licenses/MIT 
 
 <h2>Acknowledgments</h2>
-Use images from Lesbian & Gay Big Apple Corps website. An actual marching band I am a member of. Inspired by the website's ridiculously bad design. 
+Used images from Lesbian & Gay Big Apple Corps website. An actual marching band I am a member of. Inspired by the website's ridiculously bad design. 
