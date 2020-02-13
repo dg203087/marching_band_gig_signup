@@ -1,10 +1,18 @@
 <h2><b><%= @gigs.gig_name %></b></h2>
 <p><b>Date: </b><%= @gigs.date %></p>
 <p><b>Location: </b><%= @gigs.location %></p>
-<p><b>Attending? </b><%= @gigs.attending %></p>
+<p><b>Attending? </b><%= bool_to_string(@gigs.attending) %></p>
 
-<a href='/gigs/<%= @gigs.id %>/edit'>Edit</a><br>
-<a href='/gigs/<%= @gigs.id %>/delete'>Delete</a><br>
+<% if authorized_to_edit?(@gigs) %>
+    <a href='/gigs/<%= @gigs.id %>/edit'>Edit Gig</a><br>
+    
+    <form class="" action="/gigs/<%= @gigs.id %>" method="post">
+        <input type="hidden" name="_method", value="DELETE">
+        <input type="submit" name="", value="Delete Gig">
+    </form>
+<% end %>
+
+<br>
 
 <a href='/members/<%=current_member.id%>'>Back to My Profile</a><br>
 <a href="/logout">Log Out</a>

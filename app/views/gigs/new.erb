@@ -5,7 +5,11 @@
     Date: <input type='text' name='date' value=''> <br/>
     Location: <input type='text' name='location' value=''> <br/>
 
-    Check box if you plan on attending: <input type='checkbox' name='attending' value='true'><br/>
+    Check box if you plan on attending: <input type='checkbox' name='attending' value="true"><br/>
  
     <input type='submit' value='Add Gig'>
+    <br>
+    <br>
+    <a href='/members/<%=current_member.id%>'>Back to My Profile</a><br>
+    <a href="/logout">Log Out</a>
 </form>
