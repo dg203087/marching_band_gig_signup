@@ -36,7 +36,7 @@ class MembersController < ApplicationController
       #render is mostly from get requests
     else
       flash[:message] = "Your credentials were invalid. Sign up or try again!"
-      redirect to '/login'
+      redirect '/login'
     end
   end
 
@@ -47,9 +47,14 @@ class MembersController < ApplicationController
 
   #SHOW ROUTE
   get "/members/:id" do
-    @member_obj = Member.find(params[:id])
-    @gigs = @member_obj.gigs
-    erb :'members/show'
+    if logged_in? 
+      @member_obj = Member.find(params[:id])
+      @gigs = @member_obj.gigs
+      erb :'members/show'
+    else
+      redirect '/login'
+      flash[:message] = "Please login."
+    end
   end
 
 end

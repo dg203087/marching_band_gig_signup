@@ -15,7 +15,7 @@ class GigsController < ApplicationController
       redirect "/"
     end
     
-    if params[:gigs] != nil #there is something wrong gere
+    if params[:gigs] != ""
       gig = current_member.gigs.build(params)
       gig.save
       redirect "/members/#{current_member.id}"
@@ -28,7 +28,6 @@ class GigsController < ApplicationController
   #SHOW ROUTE
   get "/gigs/:id" do
     find_gig
-    # @gigs = Gig.find(params[:id])
     if logged_in?
       erb :'gigs/show' #redirects destroy instance variables
     else 
@@ -69,15 +68,22 @@ class GigsController < ApplicationController
 
   delete "/gigs/:id" do
     find_gig
-    #@delete_gig = Gig.find_by_id(params[:id])
-    @gigs.destroy #destroy removes "call backs"/related actions / delete less comprehesive
-    redirect "/members/#{current_member.id}" #not a job to show us something, it's to complete and action
+    if logged_in? && @gigs.member_id == current_member.id
+      @gigs.destroy #destroy removes "call backs"/related actions / delete less comprehesive
+      redirect "/members/#{current_member.id}" #not a job to show us something, it's to complete and action
+    else
+      redirect '/'
+    end
   end
 
   private
 
   def find_gig #instance method to stop doing repeated work
-    @gigs = Gig.find(params[:id])
+    @gigs = Gig.find_by(id: params[:id]) 
+
+    if @gigs == nil
+      flash[:message] = "There is nothing here."
+    end
   end
 
 end
