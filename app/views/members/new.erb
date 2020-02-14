@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
+    <body>
+        <h3>Sign Up</h3>
+        <form action="/members" method="POST">
 
-<body>
-    <h3>Sign Up</h3>
-    <form action="/members" method="POST">
+        <p>E-mail: <input type="text" name="email"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p>Full Name: <input type="text" name="full_name"></p>
+        <p>Instrument: <input type="text" name="instrument"></p>
+        
+        <button class="btn btn-primary" type="submit">Sign Up</button>
 
-    <p>E-mail: <input type="text" name="email"></p>
-    <p>Password: <input type="password" name="password"></p>
-    <p>Full Name: <input type="text" name="full_name"></p>
-    <p>Instrument: <input type="text" name="instrument"></p>
-    
-    <input type="submit" value="Sign Up">
+        </form>
 
-    </form>
-
-    <br>
-    <a href="/">Back to Home Page</a>
-</body>
+        <br>
+        <a href="/">Back to Home Page</a>
+    </body>
+</html>

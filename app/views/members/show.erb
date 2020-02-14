@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <body>
-
         <h2>LGBAC Member Profile</h2>
         <p><b>Name: </b><%= @member_obj.full_name %><br/>
         <b>Email: </b><%= @member_obj.email %><br/>
@@ -15,8 +14,7 @@
         <% end %>
         
         <br/>
-
-        <a href="/gigs/new">Add Gig</a><br/>
-        <a href="/logout">Log Out</a>
+        <a class="btn btn-primary" href="/gigs/new" role="button">Add Gig</a>
+        <a class="btn btn-primary" href="/logout" role="button">Log Out</a>
     </body>
 </html>

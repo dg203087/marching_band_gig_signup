@@ -4,16 +4,16 @@
 <p><b>Attending? </b><%= bool_to_string(@gigs.attending) %></p>
 
 <% if authorized_to_edit?(@gigs) %>
-    <a href='/gigs/<%= @gigs.id %>/edit'>Edit Gig</a><br>
+    <a class="btn btn-primary" href="/gigs/<%= @gigs.id %>/edit" role="button">Edit Gig</a>
     
     <form class="" action="/gigs/<%= @gigs.id %>" method="post">
         <input type="hidden" name="_method", value="DELETE">
-        <input type="submit" name="", value="Delete Gig">
+        <button class="btn btn-primary" type="submit">Delete Gig</button>
     </form>
 <% end %>
 
+<a class="btn btn-primary" href="/logout" role="button">Log Out</a>
 <br>
-
+<br>
 <a href='/members/<%=current_member.id%>'>Back to My Profile</a><br>
-<a href="/logout">Log Out</a>
 
