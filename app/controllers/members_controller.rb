@@ -8,7 +8,6 @@ class MembersController < ApplicationController
     end
   end
 
-  #create new members and persist to database
   post "/members" do
     if params[:email] == "" || params[:password] == ""
       flash[:message] = "Please enter valid member information."
@@ -20,20 +19,16 @@ class MembersController < ApplicationController
     end
   end
 
-  #PURPOSE: render login page/form
   get "/login" do
     erb :'members/login'      
   end
 
-  #PURPOSE: receive login form, find user, and log in i.e. create a session (adding key/value pair to session hash)
   post "/login" do 
-    @member_obj = Member.find_by(:email => params[:email]) #find_by takes key/value pair
+    @member_obj = Member.find_by(:email => params[:email]) 
     
     if @member_obj && @member_obj.authenticate(params[:password])
       session[:member_id] = @member_obj.id
       redirect "/members/#{@member_obj.id}" 
-      #redirect is used instead of render - separation of concerns (each thing does one thing)
-      #render is mostly from get requests
     else
       flash[:message] = "Your credentials were invalid. Sign up or try again!"
       redirect '/login'
@@ -45,7 +40,6 @@ class MembersController < ApplicationController
     redirect to '/'
   end
 
-  #SHOW ROUTE
   get "/members/:id" do
     if logged_in? 
       @member_obj = Member.find(params[:id])
