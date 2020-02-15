@@ -1,13 +1,21 @@
 <h1>Gig Attendance List</h1>
 
   <% @gigs.each do |gig| %>
-    <p>Name: <%= gig.gig_name %></a><br/>
-    <a href='/gigs/<%= gig.id %>/edit'>Edit</a>
-    <a href='/gigs/<%= gig.id %>/delete'>Delete</a><br/>
+    <p><b><%= gig.gig_name %></a></b>
     Date: <%= gig.date %><br/>
     Location: <%= gig.location %><br/>
-    Attending: <%= bool_to_string(gig.attending) %><br/></p>
+    Attending: <%= bool_to_string(gig.attending) %><br/>
+    Added By: <%= gig.member_id %><br>
+   
+   <% if authorized_to_edit?(gig) && gig.member_id != "" %>
+    <a class="btn btn-primary" href='/gigs/<%= gig.id %>/edit' role="buttom">Edit</a>
+      <form class="" action="/gigs/<%= gig.id %>" method="post">
+          <input type="hidden" name="_method", value="DELETE">
+          <button class="btn btn-primary" type="submit">Delete</button>
+      </form>
+    <% end %>
+    <br>
   <% end %>
 
-
-<a href="/logout">Log Out</a>
+<a class="btn btn-primary" href="/logout" role="button">Log Out</a><br><br>
+<a href="/">Back to Home Page</a>

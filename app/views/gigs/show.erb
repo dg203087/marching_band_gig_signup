@@ -2,6 +2,7 @@
 <p><b>Date: </b><%= @gigs.date %></p>
 <p><b>Location: </b><%= @gigs.location %></p>
 <p><b>Attending? </b><%= bool_to_string(@gigs.attending) %></p>
+<p><b>Added by: </b><%= @gigs.member_id %></p>
 
 <% if authorized_to_edit?(@gigs) %>
     <a class="btn btn-primary" href="/gigs/<%= @gigs.id %>/edit" role="button">Edit Gig</a>
